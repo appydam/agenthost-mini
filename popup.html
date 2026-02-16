@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      width: 320px;
+      padding: 16px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      margin: 0;
+    }
+    
+    h1 {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 0 0 12px 0;
+      color: #111827;
+    }
+    
+    p {
+      font-size: 14px;
+      color: #6b7280;
+      line-height: 1.5;
+      margin: 0 0 16px 0;
+    }
+    
+    .usage {
+      background: #f3f4f6;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+    }
+    
+    .usage-count {
+      font-size: 24px;
+      font-weight: 700;
+      color: #3b82f6;
+      margin-bottom: 4px;
+    }
+    
+    .usage-label {
+      font-size: 13px;
+      color: #6b7280;
+    }
+    
+    .cta {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background: #3b82f6;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 500;
+      font-size: 14px;
+    }
+    
+    .cta:hover {
+      background: #2563eb;
+    }
+    
+    .instructions {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid #e5e7eb;
+      font-size: 13px;
+      color: #6b7280;
+    }
+    
+    .instructions strong {
+      color: #111827;
+    }
+  </style>
+</head>
+<body>
+  <h1>AgentHost Mini</h1>
+  <p>Get instant AI-powered research on any company</p>
+  
+  <div class="usage">
+    <div class="usage-count" id="usage-count">-/3</div>
+    <div class="usage-label">Briefs used today</div>
+  </div>
+  
+  <a href="https://agenthost.dev/pricing" target="_blank" class="cta">
+    Upgrade to Pro - $15/mo
+  </a>
+  
+  <div class="instructions">
+    <strong>How to use:</strong><br>
+    1. Select a company name on any webpage<br>
+    2. Right-click → "Research [company] with AgentHost"<br>
+    3. Get instant insights in 30-60 seconds
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>
