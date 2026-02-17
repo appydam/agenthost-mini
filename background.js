@@ -94,13 +94,22 @@ async function incrementUsage() {
 
 async function getApiKey() {
   const data = await chrome.storage.local.get('apiKey');
-  return data.apiKey || 'demo-key'; // TODO: Real auth flow
+  return data.apiKey || 'demo-key'; // Demo mode = client-side limits
 }
 
-// Listen for messages from content script
+// Allow users to set API key (for Pro tier)
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.type === 'GET_USAGE') {
-    getUsageCount().then(sendResponse);
+  if (request.type === 'SET_API_KEY') {
+    chrome.storage.local.set({ apiKey: request.apiKey }, () => {
+      sendResponse({ success: true });
+    });
     return true; // Async response
   }
+  
+  if (request.type === 'GET_USAGE') {
+    getUsageCount().then(sendResponse);
+    return true;
+  }
 });
+
+// Note: Message listener already defined above (merged)
