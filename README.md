@@ -102,18 +102,30 @@ cd landing
 # Deploy static HTML
 ```
 
-## TODO
+## Progress
 
-- [ ] Create actual icons (16x16, 48x48, 128x128)
-- [ ] Integrate real OpenClaw agent for research
+### Day 1 ✅
+- [x] Chrome extension (Manifest V3, context menu, sidebar UI)
+- [x] Backend API (Express server)
+- [x] Landing page (features + pricing)
+- [x] Documentation (README, DEPLOY, INTEGRATION)
+
+### Day 2 🚧
+- [x] Placeholder icons (SVG - 16x16, 48x48, 128x128)
+- [x] Integrate real OpenClaw/Scout agent for research
+- [ ] Deploy backend API to Railway
 - [ ] Add authentication flow (email login)
+- [ ] Test extension end-to-end
 - [ ] Add usage tracking/analytics
+
+### Remaining
+- [ ] Professional icons (hire designer)
 - [ ] Add CRM export feature (Pro tier)
-- [ ] Add Chrome Web Store assets (screenshots, promo images)
-- [ ] Add privacy policy & terms of service
-- [ ] Set up payment processing (Stripe) for Pro tier
-- [ ] Add error tracking (Sentry)
-- [ ] Add tests
+- [ ] Chrome Web Store assets (screenshots, promo images)
+- [ ] Privacy policy & terms of service
+- [ ] Payment processing (Stripe) for Pro tier
+- [ ] Error tracking (Sentry)
+- [ ] Tests
 
 ## Revenue Model
 

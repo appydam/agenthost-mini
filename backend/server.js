@@ -37,31 +37,8 @@ app.post('/research', async (req, res) => {
   }
 });
 
-// Mock research function (replace with real OpenClaw agent call)
-async function performResearch(company) {
-  // Simulate API delay
-  await new Promise(resolve => setTimeout(resolve, 2000));
-  
-  // TODO: Replace with actual OpenClaw agent research
-  // Example OpenClaw integration:
-  // const response = await fetch(`${OPENCLAW_ENDPOINT}/api/agents/research`, {
-  //   method: 'POST',
-  //   headers: { 'Content-Type': 'application/json' },
-  //   body: JSON.stringify({
-  //     task: `Research ${company}: overview, funding, tech stack, recent news, pain points`,
-  //     agentId: 'scout',
-  //     timeoutSeconds: 120
-  //   })
-  // });
-  
-  return {
-    overview: `${company} is a technology company operating in the B2B SaaS space. Founded in 2020, they provide enterprise solutions for mid-market companies.`,
-    funding: `Series A: $10M raised from Sequoia Capital (2022). Total funding: $15M. Valuation estimated at $50M.`,
-    techStack: `React, Node.js, PostgreSQL, AWS (EC2, RDS, S3), Redis, Docker. Uses microservices architecture.`,
-    news: `Recently announced partnership with Microsoft Azure (Jan 2026). Expanded to European market with London office opening.`,
-    painPoints: `Scaling infrastructure costs, customer acquisition in competitive market, need for enterprise security certifications (SOC 2, ISO 27001).`
-  };
-}
+// Import OpenClaw research agent integration
+const { performResearch } = require('./research-agent');
 
 // Health check
 app.get('/health', (req, res) => {
