@@ -3,32 +3,56 @@
 
 const express = require('express');
 const cors = require('cors');
+const { performResearch } = require('./research-agent');
+const { verifyApiKey, incrementUsage } = require('./auth');
+
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
-const OPENCLAW_ENDPOINT = process.env.OPENCLAW_ENDPOINT || 'http://localhost:3100';
 
 // Research endpoint
 app.post('/research', async (req, res) => {
   const { company, requestId } = req.body;
+  const apiKey = req.headers['x-api-key'] || req.body.apiKey || 'demo-key';
   
   if (!company) {
     return res.status(400).json({ error: 'Company name required' });
   }
   
+  // Verify API key and check limits
+  const auth = verifyApiKey(apiKey);
+  
+  if (!auth.valid) {
+    return res.status(auth.remainingToday === 0 ? 429 : 401).json({
+      error: auth.error,
+      tier: auth.tier,
+      upgradeUrl: auth.upgradeUrl
+    });
+  }
+  
   try {
-    // TODO: Call OpenClaw agent to perform research
-    // For MVP, return mock data
+    // Perform research
     const research = await performResearch(company);
+    
+    // Increment usage (if not demo mode)
+    incrementUsage(apiKey);
+    
+    // Get updated usage
+    const updatedAuth = verifyApiKey(apiKey);
     
     res.json({
       company,
       requestId,
       data: research,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
+      usage: {
+        tier: updatedAuth.tier,
+        remainingToday: updatedAuth.remainingToday,
+        dailyLimit: updatedAuth.dailyLimit
+      }
     });
     
   } catch (error) {
@@ -36,9 +60,6 @@ app.post('/research', async (req, res) => {
     res.status(500).json({ error: 'Research failed', message: error.message });
   }
 });
-
-// Import OpenClaw research agent integration
-const { performResearch } = require('./research-agent');
 
 // Health check
 app.get('/health', (req, res) => {
