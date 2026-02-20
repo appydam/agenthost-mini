@@ -53,6 +53,20 @@ rsvg-convert -w 48 -h 48 icon.svg -o icon-48.png
 rsvg-convert -w 128 -h 128 icon.svg -o icon-128.png
 ```
 
+### Option 5: Python Script (Included - Used for Current PNGs)
+```bash
+cd icons
+# Create virtual environment (first time only)
+uv venv .venv
+source .venv/bin/activate
+uv pip install cairosvg
+
+# Run conversion script
+python3 convert_svg_to_png.py
+```
+
+This script automatically converts all three icon sizes and is the method used to generate the current PNG files.
+
 ## After Generating PNGs
 
 1. Verify all 3 PNG files are in `/icons/` directory
@@ -64,8 +78,9 @@ rsvg-convert -w 128 -h 128 icon.svg -o icon-128.png
 ## Current Status
 
 - ✅ SVG source file created with professional design
-- ⬜ PNG exports pending (requires image conversion tools)
-- ⬜ Manifest updated to reference PNG files
+- ✅ PNG exports completed (icon-16.png, icon-48.png, icon-128.png)
+- ✅ Manifest updated to reference PNG files
+- ✅ Conversion script included (convert_svg_to_png.py)
 
 ## Design Notes
 
